@@ -12,7 +12,7 @@ export function HeroSection() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-        
+
         {/* Animated glow effects */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[128px] animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[128px] animate-pulse delay-1000" />
@@ -39,7 +39,7 @@ export function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-xl">
-            Explore minha vitrine tecnológica e descubra o arsenal de habilidades que utilizo para criar experiências digitais de alto desempenho. Do front-end dinâmico ao back-end Oracle robusto, venha ver este desenvolimento constante comigo.
+            Explore minha vitrine tecnológica e descubra o arsenal de habilidades que utilizo para criar experiências digitais de alto desempenho. Do front-end dinâmico ao back-end Oracle robusto, venha ver este desenvolvimento constante comigo.
           </p>
 
           {/* CTA Buttons */}
@@ -52,7 +52,7 @@ export function HeroSection() {
               <ArrowRight className="relative z-10 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            
+
             <a
               href="#"
               className="inline-flex items-center gap-2 px-8 py-4 bg-secondary/50 border border-border hover:border-purple-500/50 rounded-lg font-semibold text-foreground transition-all hover:bg-secondary"

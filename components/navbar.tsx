@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { GamerLogo } from "./gamer-logo"
 import { Search, ShoppingCart, Menu, X, User } from "lucide-react"
 
 const navLinks = [
-  { name: "Início", href: "#" },
+  { name: "Início", href: "/" },
   { name: "Tech Stacks", href: "#products" },
   { name: "Sobre Mim", href: "/sobre" },
 ]
@@ -19,11 +20,12 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 shrink-0">
+          <Link href="/" className="flex items-center gap-3 shrink-0">
             <GamerLogo className="drop-shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
             <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent hidden sm:block">
-              NexusDEV            </span>
-          </a>
+              NexusDEV
+            </span>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-7">
@@ -99,7 +101,7 @@ export function Navbar() {
                   className="w-full h-10 pl-10 pr-4 bg-secondary/50 border border-border/50 rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-purple-500/50"
                 />
               </div>
-              
+
               {/* Mobile Nav Links */}
               {navLinks.map((link) => (
                 <a
