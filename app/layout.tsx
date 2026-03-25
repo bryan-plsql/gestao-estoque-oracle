@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { AuthProvider } from '@/contexts/auth-context'
+import { WelcomeModal } from '@/components/welcome-modal'
 
 export const metadata: Metadata = {
   title: 'NexusGamer | Loja Premium de Gaming Mobile',
@@ -33,8 +35,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        {children}
-        <Analytics />
+        <AuthProvider>
+          <WelcomeModal />
+          {children}
+          <Analytics />
+        </AuthProvider>
       </body>
     </html>
   )

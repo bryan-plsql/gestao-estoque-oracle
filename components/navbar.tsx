@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { GamerLogo } from "./gamer-logo"
-import { Search, ShoppingCart, Menu, X, User, Loader2 } from "lucide-react"
+import { Search, ShoppingCart, Menu, X, User, Loader2, LogOut } from "lucide-react"
+import { useAuth } from "@/contexts/auth-context"
 import { type Stack } from "@/types/stack"
 
 const navLinks = [
@@ -13,6 +15,8 @@ const navLinks = [
 ]
 
 export function Navbar() {
+  const { adventurerName, isLoggedIn, logout } = useAuth()
+  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [results, setResults] = useState<Stack[]>([])
@@ -173,10 +177,43 @@ export function Navbar() {
               <Search className="h-5 w-5" />
             </button>
 
-            {/* User */}
-            <button className="p-2 text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
-              <User className="h-5 w-5" />
-            </button>
+            {/* User Profile / Login */}
+            {isLoggedIn ? (
+              <div className="relative group hidden sm:block">
+                <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-purple-500/10 border border-purple-500/30 hover:border-purple-500/60 transition-all">
+                  <User className="h-4 w-4 text-purple-400" />
+                  <span className="text-sm font-medium text-purple-300 truncate max-w-[150px]">{adventurerName}</span>
+                </button>
+
+                {/* Dropdown menu */}
+                <div className="absolute right-0 top-full mt-1 w-48 bg-slate-900/95 backdrop-blur-md border border-purple-500/30 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                  <Link
+                    href="/perfil"
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:bg-purple-500/10 transition-colors"
+                  >
+                    <User className="h-4 w-4" />
+                    Meu Perfil
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout()
+                      router.push('/')
+                      setMobileMenuOpen(false)
+                    }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sair da Guilda
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Link href="/login" className="hidden sm:block">
+                <button className="px-3 py-1.5 rounded-lg bg-purple-600/20 border border-purple-500/30 hover:border-purple-500/60 text-sm font-medium text-purple-300 hover:text-purple-200 transition-all">
+                  ⚔️ Login
+                </button>
+              </Link>
+            )}
 
             {/* Cart */}
             <button className="relative p-2 text-muted-foreground hover:text-foreground transition-colors group">
@@ -221,6 +258,35 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
+
+              {/* Mobile Auth */}
+              {isLoggedIn ? (
+                <div className="pt-2 border-t border-border/50 space-y-2">
+                  <Link href="/perfil" onClick={() => setMobileMenuOpen(false)}>
+                    <button className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-300 hover:border-purple-500/60 transition-all">
+                      <User className="h-4 w-4" />
+                      {adventurerName}
+                    </button>
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout()
+                      router.push('/')
+                      setMobileMenuOpen(false)
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 hover:border-red-500/60 transition-all"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sair da Guilda
+                  </button>
+                </div>
+              ) : (
+                <Link href="/login" className="pt-2 border-t border-border/50 block" onClick={() => setMobileMenuOpen(false)}>
+                  <button className="w-full px-3 py-2 text-sm rounded-lg bg-purple-600/20 border border-purple-500/30 text-purple-300 hover:border-purple-500/60 transition-all font-medium">
+                    ⚔️ Fazer Login
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         )}
