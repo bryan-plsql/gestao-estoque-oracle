@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { GamerLogo } from "./gamer-logo"
-import { Search, ShoppingCart, Menu, X, User, Loader2, LogOut } from "lucide-react"
+import { Search, Backpack, Menu, X, User, Loader2, LogOut } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
+import { useCart } from "@/contexts/cart-context"
 import { type Stack } from "@/types/stack"
 
 const navLinks = [
@@ -16,6 +17,7 @@ const navLinks = [
 
 export function Navbar() {
   const { adventurerName, isLoggedIn, logout } = useAuth()
+  const { itemCount, openCart } = useCart()
   const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [query, setQuery] = useState("")
@@ -215,12 +217,18 @@ export function Navbar() {
               </Link>
             )}
 
-            {/* Cart */}
-            <button className="relative p-2 text-muted-foreground hover:text-foreground transition-colors group">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-0.5 -right-0.5 h-4 w-4 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full text-[10px] font-bold text-foreground flex items-center justify-center shadow-[0_0_10px_rgba(139,92,246,0.5)]">
-                3
-              </span>
+            {/* Cart / Mochila de Proficiencias */}
+            <button
+              onClick={openCart}
+              className="relative p-2 text-muted-foreground hover:text-purple-400 transition-colors group"
+              aria-label="Abrir mochila de proficiencias"
+            >
+              <Backpack className="h-5 w-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)] transition-all" />
+              {itemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 h-4 w-4 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full text-[10px] font-bold text-foreground flex items-center justify-center shadow-[0_0_10px_rgba(139,92,246,0.5)] animate-pulse">
+                  {itemCount}
+                </span>
+              )}
             </button>
 
             {/* Mobile Menu Toggle */}

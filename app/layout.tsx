@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { AuthProvider } from '@/contexts/auth-context'
+import { CartProvider } from '@/contexts/cart-context'
 import { WelcomeModal } from '@/components/welcome-modal'
+import { ProficiencyBag } from '@/components/proficiency-bag'
 
 export const metadata: Metadata = {
   title: 'NexusGamer | Loja Premium de Gaming Mobile',
@@ -36,9 +38,12 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans antialiased">
         <AuthProvider>
-          <WelcomeModal />
-          {children}
-          <Analytics />
+          <CartProvider>
+            <WelcomeModal />
+            <ProficiencyBag />
+            {children}
+            <Analytics />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
