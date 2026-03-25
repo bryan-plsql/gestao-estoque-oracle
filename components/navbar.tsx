@@ -6,9 +6,8 @@ import { Search, ShoppingCart, Menu, X, User } from "lucide-react"
 
 const navLinks = [
   { name: "Início", href: "#" },
-  { name: "Produtos", href: "#products" },
-  { name: "Ofertas", href: "#" },
-  { name: "Sobre", href: "#" },
+  { name: "Tech Stacks", href: "#products" },
+  { name: "Sobre Mim", href: "/sobre" },
 ]
 
 export function Navbar() {
@@ -23,12 +22,11 @@ export function Navbar() {
           <a href="#" className="flex items-center gap-3 shrink-0">
             <GamerLogo className="drop-shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
             <span className="text-xl font-bold bg-gradient-to-r from-purple-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent hidden sm:block">
-              NexusGamer
-            </span>
+              NexusDEV            </span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-7">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -49,7 +47,7 @@ export function Navbar() {
                 <Search className="absolute left-3 h-4 w-4 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="Buscar produtos..."
+                  placeholder="Buscar Stacks..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full h-10 pl-10 pr-4 bg-secondary/50 border border-border/50 rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 transition-all"

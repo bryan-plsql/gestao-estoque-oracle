@@ -79,7 +79,7 @@ export function ProductGrid() {
 
   return (
     <section className="py-12 px-4 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-bold text-white mb-8">Produtos <span className="text-purple-400">Nexus</span></h2>
+      <h2 className="text-3xl font-bold text-white mb-8">Minha <span className="text-purple-400">Vitrine</span></h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
