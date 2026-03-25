@@ -1,4 +1,4 @@
-import { ArrowRight, Zap, Shield, Truck, Box } from "lucide-react"
+import { ArrowRight, Zap, Shield, Box } from "lucide-react"
 
 export function HeroSection() {
   return (
@@ -45,7 +45,7 @@ export function HeroSection() {
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 mb-12">
             <a
-              href="#products"
+              href="/stacks"
               className="group relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-500 rounded-lg font-semibold text-foreground overflow-hidden transition-all hover:shadow-[0_0_30px_rgba(139,92,246,0.4)]"
             >
               <span className="relative z-10">Tech Stacks</span>
@@ -54,7 +54,7 @@ export function HeroSection() {
             </a>
 
             <a
-              href="#"
+              href="/sobre"
               className="inline-flex items-center gap-2 px-8 py-4 bg-secondary/50 border border-border hover:border-purple-500/50 rounded-lg font-semibold text-foreground transition-all hover:bg-secondary"
             >
               Saiba Mais
