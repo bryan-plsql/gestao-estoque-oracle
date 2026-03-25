@@ -2,59 +2,74 @@
 
 import { useAuth } from '@/contexts/auth-context'
 import { useEffect, useState } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { X } from 'lucide-react'
 
 export function WelcomeModal() {
   const { isLoggedIn } = useAuth()
-  const [isOpen, setIsOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Only show if not logged in - delay to avoid hydration mismatch
+    // Verifica se o usuário já logou ou se já fechou esse aviso na sessão atual
+    const hasDismissed = sessionStorage.getItem('welcomeDismissed')
+    if (isLoggedIn || hasDismissed) return
+
+    // Timer de 1 minuto (10000 ms). 
+    // DICA: Para testar agora sem esperar, mude temporariamente para 3000 (3 segundos)
     const timer = setTimeout(() => {
-      if (!isLoggedIn) {
-        setIsOpen(true)
-      }
-    }, 100)
+      setIsVisible(true)
+    }, 3000)
 
     return () => clearTimeout(timer)
   }, [isLoggedIn])
 
+  const handleDismiss = () => {
+    setIsVisible(false)
+    // Salva na sessão para não incomodar mais até o usuário fechar a aba
+    sessionStorage.setItem('welcomeDismissed', 'true')
+  }
+
+  // Se não for para aparecer, não renderiza nada na tela
+  if (!isVisible) return null
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="border-purple-500/30 bg-slate-900/95 backdrop-blur-md sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-center bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Identifique-se, Aventureiro
-          </DialogTitle>
-          <DialogDescription className="text-center text-muted-foreground mt-2">
-            Bem-vindo ao NexusDEV! Para desbloquear a experiência completa do mercado de proficiências e sistema de níveis, recomendamos fazer login.
-          </DialogDescription>
-        </DialogHeader>
+    <div className="fixed top-20 right-4 md:right-8 z-50 w-80 animate-in slide-in-from-right-8 fade-in duration-500">
+      <div className="relative border border-purple-500/40 bg-slate-950/95 backdrop-blur-xl p-5 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+        
+        {/* Botão X para fechar */}
+        <button 
+          onClick={handleDismiss}
+          className="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors"
+          aria-label="Fechar aviso"
+        >
+          <X size={18} />
+        </button>
 
-        <div className="space-y-4 mt-6">
-          <p className="text-xs text-muted-foreground text-center bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
-            ℹ️ Santuário Seguro: Podes usar dados reais ou inventar um avatar. O objetivo é testar as mecânicas deste portfólio.
-          </p>
+        <h3 className="text-sm font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
+          Sinal da Guilda Detectado 📡
+        </h3>
+        
+        <p className="text-xs text-slate-300 mb-4 pr-4 leading-relaxed">
+          Aventureiro, você está navegando no modo Convidado. Faça login (mesmo com dados fictícios) para habilitar o mercado de proficiências e salvar seu XP.
+        </p>
 
-          <div className="space-y-3">
-            <Link href="/login" onClick={() => setIsOpen(false)} className="block">
-              <Button className="w-full bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white font-medium border border-purple-400/30 shadow-lg shadow-purple-500/20">
-                ⚔️ Fazer Login
-              </Button>
-            </Link>
-
-            <Button
-              variant="outline"
-              onClick={() => setIsOpen(false)}
-              className="w-full border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/10 text-cyan-400 hover:text-cyan-300"
-            >
-              🗺️ Continuar como Convidado
+        <div className="flex gap-2">
+          <Link href="/login" onClick={handleDismiss} className="flex-1">
+            <Button size="sm" className="w-full bg-purple-600 hover:bg-purple-700 text-white border border-purple-400/50 shadow-[0_0_10px_rgba(147,51,234,0.3)] text-xs">
+              ⚔️ Fazer Login
             </Button>
-          </div>
+          </Link>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={handleDismiss}
+            className="flex-1 border-slate-700 bg-slate-800/50 hover:bg-slate-800 text-slate-300 text-xs"
+          >
+            Dispensar
+          </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   )
 }
