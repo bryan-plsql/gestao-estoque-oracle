@@ -14,16 +14,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [adventurerName, setAdventurerName] = useState<string | null>(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [isHydrated, setIsHydrated] = useState(false)
 
-  // Hydrate from localStorage on mount
+  // Assim que o site carregar na tela, ele busca o jogador silenciosamente
   useEffect(() => {
     const saved = localStorage.getItem('adventurerName')
     if (saved) {
       setAdventurerName(saved)
       setIsLoggedIn(true)
     }
-    setIsHydrated(true)
   }, [])
 
   const login = (name: string) => {
@@ -38,11 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('adventurerName')
   }
 
-  // Prevent rendering until hydrated
-  if (!isHydrated) {
-    return <>{children}</>
-  }
-
+  // Retornamos os filhos DIRETAMENTE, sem bloquear nada!
   return (
     <AuthContext.Provider value={{ adventurerName, isLoggedIn, login, logout }}>
       {children}
