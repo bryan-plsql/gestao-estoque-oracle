@@ -41,7 +41,7 @@ export function ProductGrid() {
     async function fetchProducts() {
       try {
         const response = await fetch(
-          "https://ga4e8095ca61a71-dbestudos.adb.sa-vinhedo-1.oraclecloudapps.com/ords/dbapex/api/produtos/",
+          "process.env.NEXT_PUBLIC_API_URL",
         )
         if (!response.ok) {
           throw new Error(`Falha ao buscar produtos: ${response.status}`)
