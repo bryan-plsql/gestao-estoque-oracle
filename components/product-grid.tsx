@@ -41,7 +41,7 @@ export function ProductGrid() {
     async function fetchProducts() {
       try {
         const response = await fetch(
-          "process.env.NEXT_PUBLIC_API_URL",
+          process.env.NEXT_PUBLIC_API_URL !
         )
         if (!response.ok) {
           throw new Error(`Falha ao buscar produtos: ${response.status}`)
