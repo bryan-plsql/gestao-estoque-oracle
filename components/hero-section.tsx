@@ -23,7 +23,7 @@ export function HeroSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-cyan-500/10 border border-purple-500/30 mb-6">
             <Zap className="h-4 w-4 text-cyan-400" />
-            <span className="text-sm font-medium text-cyan-400">Novo Lançamento</span>
+            <span className="text-sm font-medium text-cyan-400">Portifolio</span>
           </div>
 
           {/* Main Heading */}
