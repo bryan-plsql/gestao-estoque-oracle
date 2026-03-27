@@ -4,8 +4,8 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
-  title: 'Commander Portfolio | Cyberpunk Developer',
-  description: 'Static cyberpunk portfolio featuring projects, player stats, and quest logs.',
+  title: 'Commander Bryan | Desenvolvedor Full Stack',
+  description: 'Portfolio cyberpunk de alta tecnologia com projetos, telemetria de habilidades e arquivos de operacao.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
