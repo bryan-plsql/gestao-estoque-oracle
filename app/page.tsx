@@ -62,6 +62,7 @@ const containerVariants = {
   },
 }
 
+//corrigindo erro, calando o typescript
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -69,7 +70,7 @@ const itemVariants = {
     y: 0,
     transition: { duration: 0.5, ease: "easeOut" },
   },
-}
+} as any;
 
 export default function Home() {
   return (
