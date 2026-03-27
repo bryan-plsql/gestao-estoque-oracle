@@ -1,14 +1,11 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-import { AuthProvider } from '@/contexts/auth-context'
-import { CartProvider } from '@/contexts/cart-context'
-import { WelcomeModal } from '@/components/welcome-modal'
-import { ProficiencyBag } from '@/components/proficiency-bag'
+import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
-  title: 'NexusGamer | Loja Premium de Gaming Mobile',
-  description: 'A maior loja de smartphones gamers e acessórios premium do Brasil. ROG Phone, RedMagic, controles, fones e muito mais.',
+  title: 'Commander Portfolio | Cyberpunk Developer',
+  description: 'Static cyberpunk portfolio featuring projects, player stats, and quest logs.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -35,16 +32,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <AuthProvider>
-          <CartProvider>
-            <WelcomeModal />
-            <ProficiencyBag />
-            {children}
-            <Analytics />
-          </CartProvider>
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )
